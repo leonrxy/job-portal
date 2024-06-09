@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum verified {
+  true
+  false
+}
+
+enum status {
+  pending
+  accepted
+  rejected
+}
+
+model job_seekers {
+  job_seeker_id      String              @id @default(uuid())
+  email              String              @unique
+  full_name          String
+  password           String
+  otp                String?
+  otpExpires         DateTime?
+  verified           verified            @default(false)
+  created_at         DateTime            @default(now())
+  updated_at         DateTime            @updatedAt
+  job_seeker_details job_seeker_details?
+}
+
+model job_seeker_details {
+  job_seeker_detail_id String      @id @default(uuid())
+  job_seeker_id        String      @unique
+  job_seeker           job_seekers @relation(fields: [job_seeker_id], references: [job_seeker_id])
+  resume_url           String?
+  bio                  String?
+  created_at           DateTime    @default(now())
+  updated_at           DateTime    @updatedAt
+}
+
+model universities {
+  university_id     String              @id @default(uuid())
+  email             String              @unique
+  university_name   String
+  password          String
+  otp               String?
+  otpExpires        DateTime?
+  verified          verified            @default(false)
+  status            status              @default(pending)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  university_detail university_details?
+}
+
+model university_details {
+  university_detail_id String       @id @default(uuid())
+  university_id        String       @unique
+  university           universities @relation(fields: [university_id], references: [university_id])
+  logo_url             String?
+  address              String?
+  photo_url            String?
+  created_at           DateTime     @default(now())
+  updated_at           DateTime     @updatedAt
+}
+
+model companies {
+  company_id     String           @id @default(uuid())
+  email          String           @unique
+  company_name   String
+  password       String
+  otp            String?
+  otpExpires     DateTime?
+  verified       verified         @default(false)
+  status         status           @default(pending)
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  company_detail company_details?
+}
+
+model company_details {
+  company_detail_id String    @id @default(uuid())
+  company_id        String    @unique
+  company           companies @relation(fields: [company_id], references: [company_id])
+  logo_url          String?
+  address           String?
+  photo_url         String?
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+}
+
+model admins {
+  admin_id   String   @id @default(uuid())
+  email      String   @unique
+  full_name  String
+  password   String
+  role       role     @default(admin)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+enum role {
+  superadmin
+  admin
+}

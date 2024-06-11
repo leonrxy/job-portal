@@ -14,9 +14,9 @@ async function main() {
     // Seed job seekers
     await prisma.job_seekers.create({
         data: {
-            full_name: 'Job Seeker',
             email: 'jobseeker@mail.com',
             password: passwordJobSeeker,
+            full_name: 'Job Seeker',
             verified: 'true',
             job_seeker_details: {
                 create: {
@@ -30,13 +30,14 @@ async function main() {
     // Seed universities
     await prisma.universities.create({
         data: {
-            university_name: 'University',
             email: 'university@mail.com',
             password: passwordUniversity,
+            university_name: 'University',
             verified: 'true',
             status: 'accepted',
             university_detail: {
                 create: {
+                    phone_number: '0123456789',
                     logo_url: 'http://example.com/logo.png',
                     address: '123 University St',
                     photo_url: 'http://example.com/photo.png',
@@ -48,9 +49,10 @@ async function main() {
     // Seed companies
     await prisma.companies.create({
         data: {
-            company_name: 'Company',
             email: 'company@mail.com',
             password: passwordCompany,
+            company_name: 'Company',
+            phone_number: '0123456789',
             verified: 'true',
             status: 'accepted',
             company_detail: {

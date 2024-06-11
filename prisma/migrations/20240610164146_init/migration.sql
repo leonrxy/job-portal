@@ -2,8 +2,8 @@
 CREATE TABLE `job_seekers` (
     `job_seeker_id` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
-    `full_name` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `full_name` VARCHAR(191) NOT NULL,
     `otp` VARCHAR(191) NULL,
     `otpExpires` DATETIME(3) NULL,
     `verified` ENUM('true', 'false') NOT NULL DEFAULT 'false',
@@ -17,9 +17,9 @@ CREATE TABLE `job_seekers` (
 -- CreateTable
 CREATE TABLE `job_seeker_details` (
     `job_seeker_detail_id` VARCHAR(191) NOT NULL,
+    `job_seeker_id` VARCHAR(191) NOT NULL,
     `resume_url` VARCHAR(191) NULL,
     `bio` VARCHAR(191) NULL,
-    `job_seeker_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -31,8 +31,8 @@ CREATE TABLE `job_seeker_details` (
 CREATE TABLE `universities` (
     `university_id` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
-    `university_name` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `university_name` VARCHAR(191) NOT NULL,
     `otp` VARCHAR(191) NULL,
     `otpExpires` DATETIME(3) NULL,
     `verified` ENUM('true', 'false') NOT NULL DEFAULT 'false',
@@ -47,10 +47,11 @@ CREATE TABLE `universities` (
 -- CreateTable
 CREATE TABLE `university_details` (
     `university_detail_id` VARCHAR(191) NOT NULL,
+    `university_id` VARCHAR(191) NOT NULL,
+    `phone_number` VARCHAR(191) NOT NULL,
     `logo_url` VARCHAR(191) NULL,
     `address` VARCHAR(191) NULL,
     `photo_url` VARCHAR(191) NULL,
-    `university_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -62,8 +63,9 @@ CREATE TABLE `university_details` (
 CREATE TABLE `companies` (
     `company_id` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
-    `company_name` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `company_name` VARCHAR(191) NOT NULL,
+    `phone_number` VARCHAR(191) NOT NULL,
     `otp` VARCHAR(191) NULL,
     `otpExpires` DATETIME(3) NULL,
     `verified` ENUM('true', 'false') NOT NULL DEFAULT 'false',
@@ -78,10 +80,10 @@ CREATE TABLE `companies` (
 -- CreateTable
 CREATE TABLE `company_details` (
     `company_detail_id` VARCHAR(191) NOT NULL,
+    `company_id` VARCHAR(191) NOT NULL,
     `logo_url` VARCHAR(191) NULL,
     `address` VARCHAR(191) NULL,
     `photo_url` VARCHAR(191) NULL,
-    `company_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 

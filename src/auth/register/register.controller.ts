@@ -3,6 +3,8 @@ import { RegisterService } from './register.service';
 import { RegisterJobSeekerDto } from './dto/register-job-seeker.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { VerifyOTPDto } from './dto/verify-otp.dto';
+import { RegisterUniversityDto } from './dto/register-university.dto';
+import { RegisterCompanyDto } from './dto/register-company.dto';
 
 
 @ApiTags('auth/register')
@@ -12,8 +14,18 @@ export class RegisterController {
 
   @Post('job-seeker')
   @ApiOperation({ summary: 'Register a job seeker' })
-  create(@Body() registerJobSeekerDto: RegisterJobSeekerDto) {
+  registerJobSeeker(@Body() registerJobSeekerDto: RegisterJobSeekerDto) {
     return this.registerService.registerJobSeeker(registerJobSeekerDto);
+  }
+  @Post('company')
+  @ApiOperation({ summary: 'Register a company' })
+  registerCompany(@Body() registerCompanyDto: RegisterCompanyDto) {
+    return this.registerService.registerCompany(registerCompanyDto);
+  }
+  @Post('university')
+  @ApiOperation({ summary: 'Register a university' })
+  registerUniversity(@Body() registerUniversityDto: RegisterUniversityDto) {
+    return this.registerService.registerUniversity(registerUniversityDto);
   }
 
   @Post('verify-otp')

@@ -21,8 +21,8 @@ enum status {
 model job_seekers {
   job_seeker_id      String              @id @default(uuid())
   email              String              @unique
-  full_name          String
   password           String
+  full_name          String
   otp                String?
   otpExpires         DateTime?
   verified           verified            @default(false)
@@ -44,8 +44,8 @@ model job_seeker_details {
 model universities {
   university_id     String              @id @default(uuid())
   email             String              @unique
-  university_name   String
   password          String
+  university_name   String
   otp               String?
   otpExpires        DateTime?
   verified          verified            @default(false)
@@ -59,6 +59,7 @@ model university_details {
   university_detail_id String       @id @default(uuid())
   university_id        String       @unique
   university           universities @relation(fields: [university_id], references: [university_id])
+  phone_number         String
   logo_url             String?
   address              String?
   photo_url            String?
@@ -69,8 +70,9 @@ model university_details {
 model companies {
   company_id     String           @id @default(uuid())
   email          String           @unique
-  company_name   String
   password       String
+  company_name   String
+  phone_number   String
   otp            String?
   otpExpires     DateTime?
   verified       verified         @default(false)

@@ -52,13 +52,13 @@ export const otpEmailTemplate = (otp: string, email: string) => `
           </tr>
           <tr>
             <td>
-              <p>Hi ${email},</p>
-              <p>You are receiving this email because you requested to verify your email address.</p>
-              <p>Please use the following code to verify your email address.</p>
-              <p>Your OTP code is:</p>
+              Hi ${email},<br>
+              You are receiving this email because you requested to verify your email address.<br>
+              Please use the following code to verify your email address.<br>
+              Your OTP code is:<br>
               <div class="otp"><strong>${otp}</strong></div>
-              <p>This code is valid for 15 minutes only. Please do not share this code with anyone.</p>
-              <p>If you did not request this verification, please ignore this email.</p>
+              This code is valid for 15 minutes only. Please do not share this code with anyone.<br>
+              If you did not request this verification, please ignore this email.<br>
             </td>
           </tr>
           <tr>

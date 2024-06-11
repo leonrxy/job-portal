@@ -27,14 +27,15 @@ export class JobSeekersService {
       const { password, ...userData } = createJobSeekerDto;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await this.prisma.job_seekers.create({ data: { ...userData, password: hashedPassword } as Prisma.job_seekersCreateInput });
+      const newJobSeeker = await this.prisma.job_seekers.create({ data: { ...userData, password: hashedPassword } as Prisma.job_seekersCreateInput });
       return {
         status: "success",
         message: 'User created successfully',
-        data: newUser
+        data: newJobSeeker
       };
 
     } catch (error) {
+      console.log(error)
       throw new InternalServerErrorException('Failed to create user');
     }
   }
@@ -46,7 +47,7 @@ export class JobSeekersService {
     sortBy?: string,
     sortOrder?: 'asc' | 'desc'
   }) {
-    const { page = 1, pageSize = 10, search, sortBy = 'updated_at', sortOrder = 'asc' } = params;
+    const { page = 1, pageSize = 10, search, sortBy = 'updated_at', sortOrder = 'desc' } = params;
 
     const skip = (page - 1) * pageSize;
     const take = +pageSize;
@@ -55,10 +56,12 @@ export class JobSeekersService {
     try {
       const where = search ? {
         OR: [
-          { name: { contains: search } },
+          { full_name: { contains: search } },
           { email: { contains: search } },
         ]
       } : {};
+      const totalJobSeekers = await this.prisma.job_seekers.count({ where });
+      const totalPages = Math.ceil(totalJobSeekers / pageSize);
       const jobSeekers = await this.prisma.job_seekers.findMany({
         where,
         skip,
@@ -69,6 +72,11 @@ export class JobSeekersService {
       });
       return {
         status: "success",
+        message: 'Job Seekers retrieved successfully',
+        totalJobSeekers,
+        totalPages,
+        currentPage: page,
+        size: pageSize,
         data: jobSeekers
       };
     } catch (error) {

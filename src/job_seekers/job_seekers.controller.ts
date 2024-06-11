@@ -19,9 +19,9 @@ export class JobSeekersController {
   @ApiOperation({ summary: 'List all job seekers' })
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1, description: 'Page number' })
   @ApiQuery({ name: 'pageSize', required: false, type: Number, example: 10, description: 'Number of items per page' })
-  @ApiQuery({ name: 'search', required: false, type: String, example: 'job', description: 'Search term' })
-  @ApiQuery({ name: 'sortBy', required: false, type: String, example: 'user_id', description: 'Field to sort by' })
-  @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'], example: 'asc', description: 'Sort order' })
+  @ApiQuery({ name: 'search', required: false, type: String, example: '', description: 'Search term' })
+  @ApiQuery({ name: 'sortBy', required: false, type: String, example: '', description: 'Field to sort by' })
+  @ApiQuery({ name: 'sortOrder', required: false, enum: ['asc', 'desc'], example: '', description: 'Sort order' })
   findAll(
     @Query('page') page?: number,
     @Query('pageSize') pageSize?: number,

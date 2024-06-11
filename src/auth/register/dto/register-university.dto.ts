@@ -2,6 +2,14 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, MinLength } from "class-validator";
 
 export class RegisterUniversityDto {
+    @IsString()
+    @ApiProperty({
+        type: String,
+        description: 'This is a required property',
+        default: 'University',
+    })
+    university_name: string;
+
     @IsEmail()
     @ApiProperty({
         type: String,

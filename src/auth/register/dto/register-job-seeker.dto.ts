@@ -2,6 +2,14 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsString, MinLength } from "class-validator";
 
 export class RegisterJobSeekerDto {
+    @IsString()
+    @ApiProperty({
+        type: String,
+        description: 'This is a required property',
+        default: 'Job Seeker',
+    })
+    full_name: string;
+
     @IsEmail()
     @ApiProperty({
         type: String,
@@ -11,15 +19,7 @@ export class RegisterJobSeekerDto {
     email: string;
 
     @IsString()
-    @ApiProperty({
-        type: String,
-        description: 'This is a required property',
-        default: 'Job Seeker',
-    })
-    full_name: string;
-
-    @IsString()
-    @MinLength(6)
+    @MinLength(8)
     @ApiProperty({
         type: String,
         description: 'This is a required property',
